@@ -17,7 +17,41 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Name the product in a way the reader (i.e. your target customers) will understand.<<<<<<< _PRESS_RELEASE.md
+SafeChat
+
+## Sub-Heading ##
+  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+Chat with live feedback on the emotional impact of your message.
+
+## Summary ##
+  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+SafeChat is a text-based communication platform whose appearance constantly updates to reflect the emotional atmosphere of the conversation.
+
+## Problem ##
+  > Describe the problem your product solves.
+Online tone-deafness perpetuates the problem of not anticipating how one's messages will be read by others.
+
+## Solution ##
+  > Describe how your product elegantly solves the problem.
+Live feedback on what you say before you say it and how your past messages affected the general environment of the conversation.
+
+## Quote from You ##
+  > A quote from a spokesperson in your company.
+"Be nice to the chat room, you might hurt its feelings."
+
+## How to Get Started ##
+  > Describe how easy it is to get started.
+Sign up with third-party party authentication and start chatting by creating or joining a room!
+
+## Customer Quote ##
+  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+"That message looks meaner than it sounded in my head."
+
+## Closing and Call to Action ##
+  > Wrap it up and give pointers where the reader should go next.
+There are self-aware chat rooms waiting to be crushed by your inhumanity. What are you waiting for?
+=======
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
