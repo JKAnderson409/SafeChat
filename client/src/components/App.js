@@ -5,6 +5,7 @@ import {
   Link
 } from 'react-router-dom';
 import {Header} from './Header';
+import Sample from './Sample';
 
 export default class App extends React.Component{
   constructor(props){
@@ -18,6 +19,7 @@ export default class App extends React.Component{
         <div>
           <Header/>
           <div>Hello</div>
+          <Sample/>
         </div>
       </Router>
     )
