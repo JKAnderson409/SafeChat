@@ -2,7 +2,7 @@ let model = require("../ model")
 module.exports = {
   messages:{
     get: function(req,res){
-      model.messages.get((messages)=>{
+      model.messages.get((err,messages)=>{
         res.send(messages)
       })
     },
