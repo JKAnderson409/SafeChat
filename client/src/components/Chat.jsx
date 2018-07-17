@@ -19,9 +19,11 @@ export default class Chat extends Component {
       messageScore: 0
     }
     this.handleChange = this.handleChange.bind(this);
+    this.postMessage = this.postMessage.bind(this);
+    this.refreshInput = this.refreshInput.bind(this);
   }
 
-  componentDidMount() {
+  getMessages = () => {
     axios.get('/messages')
       .then(res => {
         const msgs = res.data.reverse();
@@ -32,6 +34,13 @@ export default class Chat extends Component {
       })
       .catch(err => {console.error(err)})
   }
+
+  componentDidMount = () => {
+    this.getMessages();
+
+  }
+
+  refreshInput = () => {this.setState({newMessageText: ''});}
 
   handleChange = (event) => {
     this.setState({
@@ -49,6 +58,8 @@ export default class Chat extends Component {
     })
       .then(res => {
         console.log('new message POSTed to /messages');
+        this.refreshInput();
+        this.getMessages();
       })
       .catch(err => {console.error(err)});
   }
@@ -62,7 +73,7 @@ export default class Chat extends Component {
             <Message key={index} messageData={message} />
           )}
         </ul>
-        <NewMessage handleChange={this.handleChange} postMessage={this.postMessage} />
+        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
       </div>
     )
   }
