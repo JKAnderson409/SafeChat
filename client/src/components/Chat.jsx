@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Sentiment from 'sentiment';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
@@ -12,6 +13,7 @@ export default class Chat extends Component {
       user: 'bob',
       userId: 1337,
       activeRoom: 'lobby',
+      rooms: ['lobby', 'theOtherRoom'],
       roomId: 1,
       roomScore: 0,
       messages: [],
@@ -21,6 +23,10 @@ export default class Chat extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
+  }
+
+  componentDidMount = () => {
+    this.getMessages();
   }
 
   getMessages = () => {
@@ -35,18 +41,13 @@ export default class Chat extends Component {
       .catch(err => {console.error(err)})
   }
 
-  componentDidMount = () => {
-    this.getMessages();
-
-  }
-
-  refreshInput = () => {this.setState({newMessageText: ''});}
-
   handleChange = (event) => {
     this.setState({
         newMessageText: event.target.value
     });
   }
+
+  refreshInput = () => {this.setState({newMessageText: ''});}
 
   postMessage = () => {
     console.log(this.state.newMessageText);
@@ -64,16 +65,25 @@ export default class Chat extends Component {
       .catch(err => {console.error(err)});
   }
 
+  changeRoom = (event) => {
+    this.setState({
+      activeRoom: event.target.value
+    });
+    console.log('leaving ' + this.state.activeRoom);
+  }
+
   render() {
     return (
-      <div className="chat">
-        <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore}/>
-        <ul>
-          {this.state.messages.map((message, index, arr) => 
-            <Message key={index} messageData={message} />
-          )}
-        </ul>
-        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+      <div>
+        <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
+        <div className="chat">
+          <ul>
+            {this.state.messages.map((message, index, arr) => 
+              <Message key={index} messageData={message} />
+            )}
+          </ul>
+          <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        </div>
       </div>
     )
   }
