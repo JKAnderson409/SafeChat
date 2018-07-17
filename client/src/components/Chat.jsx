@@ -19,10 +19,11 @@ export default class Chat extends Component {
     axios.get('/messages')
       .then(res => {
         // REFACTOR THIS according to how the server response will work
-        const msgs = res.data.messages || [{ // this is sample data
+        const msgs = res.data || [{ // this is sample data
           user: 'steve',
           text: 'hi I\'m bob!'
         }];
+        console.log(res.data);
         this.setState({
           messages: msgs
         });
