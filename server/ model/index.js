@@ -30,10 +30,22 @@ module.exports = {
   },
   users: {
     get: function(input, callback) {
-      db.query(`SELECT * FROM users WHERE username=${input}`)
+      db.query(`SELECT * FROM users WHERE username=${input}`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(result);
+        }
+      });
     }, 
-    post: function(input) {
-      db.query(`INSERT INTO users (username) VALUES (${input})`)
+    post: function(input, callback) {
+      db.query(`INSERT INTO users (username) VALUES (${input})`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(result);
+        }
+      })
     }
   }, 
   rooms: {
