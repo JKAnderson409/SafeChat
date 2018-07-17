@@ -6,10 +6,10 @@ module.exports = {
     var strQuery = 'SELECT * FROM messages';
     db.query(strQuery, (err, result) => {
       if (err) {
-        console.log(err);
+        callback(err);
       } else {
         console.log('THe get request ran');
-        callback(result);
+        callback(null, result);
       }
     });
     },
@@ -19,12 +19,12 @@ module.exports = {
       //    // if not make new account
       //  }
       var strQuery = `INSERT INTO messages (roomId, userId, text, score)
-      VALUES (${data.roomId}, ${data.userId}, ${data.text}, ${data.score}`
+      VALUES (${data.roomId}, ${data.userId}, "${data.text}", ${data.score})`
       db.query(strQuery, (err, result) => {
         if (err) {
           callback(err);
         } else {
-          callback(result);
+          callback(null, result);
         }
       });
     }
@@ -33,18 +33,18 @@ module.exports = {
     get: function(input, callback) {
       db.query(`SELECT * FROM users WHERE username=${input}`, (err, result) => {
         if (err) {
-          console.log(err);
+          callback(err);
         } else {
-          callback(result);
+          callback(null, result);
         }
       });
     }, 
     post: function(input, callback) {
       db.query(`INSERT INTO users (username) VALUES (${input})`, (err, result) => {
         if (err) {
-          console.log(err);
+          callback(err);
         } else {
-          callback(result);
+          callback(null, result);
         }
       })
     }
