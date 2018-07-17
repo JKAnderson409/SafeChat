@@ -49,6 +49,15 @@ export default class Chat extends Component {
     })
       .then(res => {
         console.log('new message POSTed to /messages');
+        axios.get('/messages')
+        .then(res => {
+          const msgs = res.data.reverse();
+          this.setState({
+            messages: msgs
+          });
+          console.log(this.state.messages);
+        })
+        .catch(err => {console.error(err)})
       })
       .catch(err => {console.error(err)});
   }
