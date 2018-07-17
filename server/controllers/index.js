@@ -2,8 +2,7 @@ let model = require("../ model")
 module.exports = {
   messages:{
     get: function(req,res){
-      model.messages.get((messages)=>{
-        // console.log('this thing runs');
+      model.messages.get((err,messages)=>{
         res.send(messages)
       })
     },
@@ -11,7 +10,7 @@ module.exports = {
       let message = req.body
       model.messages.post(message,(err,result)=>{
         if(err) res.send(err)
-        else res.send("Successfully added: ", message)
+        else res.send(message)
       })
     }
   },
