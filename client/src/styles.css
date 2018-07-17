@@ -1,4 +1,5 @@
 .chat {
+  font-size: x-small;
   background-color: slategray;
   margin-left: auto;
   margin-right: auto;
@@ -6,16 +7,19 @@
   box-sizing: border-box;
   width: 90%;
   height: 700px;
-  overflow: hidden;
-  position: relative;
+  overflow: scroll;
+  position: absolute;
 }
 
 .message {
   border: 5px solid whitesmoke;
-  position: absolute;
-  width: 85%;
-  bottom: 10%;
-  right: auto;
+  margin: 5px;
+  position: relative;
+  height: 20px;
+  width: 90%;
+  top: 25px;
+  text-align: center;
+  box-sizing: content-box;
 }
 
 .new-message {
@@ -26,7 +30,7 @@
   height: 40px;
   box-sizing: border-box;
   position: absolute;
-  bottom: 0px;
+  top: 0px;
   right: auto;
 }
 
