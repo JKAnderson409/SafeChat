@@ -3,9 +3,7 @@ import React from 'react'
 const Message = (props) => {
   return (
     <div className="message">
-      <h2>{props.messageData.roomName}</h2>
-      <h3>{props.messageData.userID}: </h3>
-      <p>{props.messageData.text}</p>
+      <p>//{props.messageData.roomName}\\ {props.messageData.userID} says {props.messageData.text}</p>
     </div>
   )
 }
