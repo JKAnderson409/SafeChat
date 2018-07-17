@@ -3,6 +3,7 @@ module.exports = {
   messages:{
     get: function(req,res){
       model.messages.get((messages)=>{
+        // console.log('this thing runs');
         res.send(messages)
       })
     },
