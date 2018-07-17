@@ -3,6 +3,8 @@ var morgan = require('morgan');
 var parser = require('body-parser');
 var cors = require('cors');
 
+var controller = require('./controllers')
+
 var app = express();
 let port = process.env.PORT || 3000;
 
@@ -15,6 +17,17 @@ app.use(morgan('dev'));
 
 app.use(express.static(__dirname + '/../client/dist'))
 
-app.listen(port,()=> console.log("Listening on :", port))
+app.get('/users')
+app.post('/users')
+
+app.get('/rooms')
+app.post('/rooms')
+
+app.get('/messages')
+app.post('/messages')
+
+app.get('/*',(req,res)=>res.redirect('/'))
+
+app.listen(port,()=> console.log('Listening on :', port))
 
 module.exports.app = app;
