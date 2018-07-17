@@ -3,26 +3,28 @@ import axios from 'axios';
 
 import Chat from './Chat.jsx';
 import styles from '../styles.css';
-
-// import textToScore from '../lib/textToScore.js'
-
-// We will have to import authentication methods
+import Login from './Login.jsx';
 
 export default class App extends React.Component{
   constructor(props){
     super(props)
-    //Sample usecase 
-    //this.state = {"input":""}
+    this.state = {isLogin: false}
+    this.handleLogin = this.handleLogin.bind(this)
+  }
+
+  handleLogin(username,password){
+    //handle Login logic
+    console.log(username,password)
+    this.setState({"isLogin":true})
   }
 
 
   render(){
     return(
       <div>
-        {/* Uncomment to try out */}
-        {/* <input type="text" onChange={(e)=>this.setState({"input": e.target.value})}></input>
-        <div>{textToScore(this.state.input)}</div> */}
-        <Chat />  
+        {this.state.isLogin
+        ? <Chat/> 
+        : <Login onLogin={this.handleLogin}/>} 
       </div>
     )
   }
