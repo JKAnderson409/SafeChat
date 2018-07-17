@@ -1,25 +1,28 @@
-CREATE DATAVASE IF NOT EXISTS chat;
+CREATE DATABASE IF NOT EXISTS chat;
 
 USE chat;
-
 
 CREATE TABLE IF NOT EXISTS users (
   id int not null auto_increment primary key,
   username varchar(18),
   password varchar(18),
-  totalscore int
+  totalscore int(10)
 );
 
 CREATE TABLE IF NOT EXISTS rooms (
   roomId int not null auto_increment primary key,
   roomname varchar(18),
-  foreign key (users_id) references users_id,
-  roomscore int not null
-)
+  users_id int(10) not null,
+  foreign key (users_id) references users(id),
+  roomscore int(10) not null
+);
 
 CREATE TABLE IF NOT EXISTS messages (
-  foreign key (rooms_roomsId) references rooms_roomsId,
-  messageid int not null auto_increment,
+  roomId int(10) not null,
+  userId int(10) not null,
+  foreign key (roomId) references rooms(roomId),
+  foreign key (userId) references users(id),
+  messageid int not null auto_increment primary key,
   text varchar(255),
-  score int
-)
+  score int(10)
+);
