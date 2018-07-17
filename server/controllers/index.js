@@ -10,7 +10,7 @@ module.exports = {
       let message = req.body
       model.messages.post(message,(err,result)=>{
         if(err) res.send(err)
-        else res.send("Successfully added: ", message)
+        else res.send(message)
       })
     }
   },
