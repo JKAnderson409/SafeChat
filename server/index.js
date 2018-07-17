@@ -23,7 +23,7 @@ app.post('/users')
 app.get('/rooms')
 app.post('/rooms')
 
-app.get('/messages')
+app.get('/messages', controller.messages.get)
 app.post('/messages')
 
 app.get('/*',(req,res)=>res.redirect('/'))
