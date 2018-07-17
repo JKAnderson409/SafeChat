@@ -29,3 +29,6 @@ CREATE TABLE IF NOT EXISTS messages (
   -- foreign key (userId) references users(id),
 -- INSERT INTO table_name (column1, column2, column3, ...)
 -- VALUES (value1, value2, value3, ...);
+
+INSERT INTO messages (roomId, userId, messageid, text, score)
+VALUES (1, 1, 1, "Fake Message in message table", 0);
