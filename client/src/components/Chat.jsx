@@ -70,7 +70,7 @@ export default class Chat extends Component {
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore}/>
         <ul>
           {this.state.messages.map((message, index, arr) => 
-            <Message key={index} messageData={message} />
+            <Message key={index} messageData={message} activeRoom={this.state.activeRoom}/>
           )}
         </ul>
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
