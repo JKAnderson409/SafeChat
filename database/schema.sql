@@ -32,3 +32,6 @@ CREATE TABLE IF NOT EXISTS messages (
 
 INSERT INTO messages (roomId, userId, messageid, text, score)
 VALUES (1, 1, 1, "Fake Message in message table", 0);
+
+
+-- mysql -u root -p < database/schema.sql
