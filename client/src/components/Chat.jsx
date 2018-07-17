@@ -8,10 +8,17 @@ export default class Chat extends Component {
     this.state = {
       roomScore: 0,
       messages: [{ // this is sample data
-        user: 'bob',
+        user: 'steve',
         text: 'hi I\'m bob!'
-      }]
+      }],
+      newMessageText: ''
     }
+    this.postMessage.bind(this);
+  }
+
+  postMessage(msg) {
+    console.log(msg);
+    // Send new message to database, update state to reflect changes and
   }
 
   render() {
@@ -23,7 +30,6 @@ export default class Chat extends Component {
             <Message key={index} messageData={message} />
           )}
         </ul>
-
         <NewMessage />
       </div>
     )

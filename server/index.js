@@ -3,10 +3,10 @@ var morgan = require('morgan');
 var parser = require('body-parser');
 var cors = require('cors');
 
-var controller = require('./controllers')
+var controller = require('./controllers');
 
 var app = express();
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 4000;
 
 app.set('port',port)
 app.use(parser.json());
