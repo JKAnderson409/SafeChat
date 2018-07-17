@@ -8,6 +8,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
+        console.log('THe get request ran');
         callback(result);
       }
     });
@@ -21,7 +22,7 @@ module.exports = {
       VALUES (${data.roomId}, ${data.userId}, ${data.text}, ${data.score}`
       db.query(strQuery, (err, result) => {
         if (err) {
-          console.log("Messages Table POST Error:", err);
+          callback(err);
         } else {
           callback(result);
         }
@@ -30,10 +31,22 @@ module.exports = {
   },
   users: {
     get: function(input, callback) {
-      db.query(`SELECT * FROM users WHERE username=${input}`)
+      db.query(`SELECT * FROM users WHERE username=${input}`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(result);
+        }
+      });
     }, 
-    post: function(input) {
-      db.query(`INSERT INTO users (username) VALUES (${input})`)
+    post: function(input, callback) {
+      db.query(`INSERT INTO users (username) VALUES (${input})`, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(result);
+        }
+      })
     }
   }, 
   rooms: {
