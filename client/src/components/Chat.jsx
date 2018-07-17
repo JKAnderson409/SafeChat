@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
 
@@ -7,13 +9,24 @@ export default class Chat extends Component {
     super(props)
     this.state = {
       roomScore: 0,
-      messages: [{ // this is sample data
-        user: 'steve',
-        text: 'hi I\'m bob!'
-      }],
+      messages: [],
       newMessageText: ''
     }
     this.postMessage.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/messages')
+      .then(res => {
+        // REFACTOR THIS according to how the server response will work
+        const msgs = res.data.messages || [{ // this is sample data
+          user: 'steve',
+          text: 'hi I\'m bob!'
+        }];
+        this.setState({
+          messages: msgs
+        });
+      });
   }
 
   postMessage(msg) {
