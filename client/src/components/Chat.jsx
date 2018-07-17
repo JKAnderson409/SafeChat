@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
+import Title from './Title.jsx';
 
 export default class Chat extends Component {
   constructor(props){
@@ -50,8 +51,8 @@ export default class Chat extends Component {
   render() {
     return (
       <div className="chat">
+        <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore}/>
         <ul>
-          // WARNING: CSS rules are too strictly set, make more dynamic to accurately test new functionality
           {this.state.messages.map((message, index) => 
             <Message key={index} messageData={message} />
           )}
