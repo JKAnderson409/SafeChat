@@ -3,10 +3,10 @@ var morgan = require('morgan');
 var parser = require('body-parser');
 var cors = require('cors');
 
-var controller = require('./controllers')
+var controller = require('./controllers');
 
 var app = express();
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 4000;
 
 app.set('port',port)
 app.use(parser.json());
@@ -23,7 +23,7 @@ app.post('/users')
 app.get('/rooms')
 app.post('/rooms')
 
-app.get('/messages')
+app.get('/messages', controller.messages.get)
 app.post('/messages')
 
 app.get('/*',(req,res)=>res.redirect('/'))
