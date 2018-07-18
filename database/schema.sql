@@ -4,7 +4,7 @@ USE chat;
 
 CREATE TABLE IF NOT EXISTS users (
   id int not null auto_increment primary key,
-  username varchar(18),
+  username varchar(18) unique,
   password varchar(18),
   totalscore int(10)
 );

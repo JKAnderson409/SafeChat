@@ -15,11 +15,17 @@ module.exports = {
     }
   },
   users:{
-    get: function(req,res){
-
+    get: function(req,res,next){
+      model.users.get(req.body,(err,result)=>{
+        if(err) next(err)
+        else res.send(result)
+      })
     },
-    post: function(req,res){
-      
+    post: function(req,res,next){
+      model.users.post(req.body,(err,result)=>{
+        if(err) next(err)
+        else res.send(result)
+      })
     }
   },
   rooms:{
