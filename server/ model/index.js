@@ -8,7 +8,7 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        console.log('THe get request ran', result);
+        // console.log('THe get request ran', result);
         callback(null, result);
       }
     });
@@ -29,16 +29,17 @@ module.exports = {
       });
     }
   },
+
   users: {
     get: function(input, callback) {
       let {username,password} = input;
       let queryStr = `SELECT * FROM users u WHERE u.username = "${username}" AND u.password = "${password}"`
       db.query(queryStr,(err, result) => {
-        console.log({result})
         if (!result.length) {
           callback("Wrong Login");
         } else {
-          callback(null, result);
+          let {id,username,totalscore}= result[0]
+          callback(null, {id,username,totalscore});
         }
       })
     }, 
@@ -49,11 +50,17 @@ module.exports = {
         if (err) {
           callback(err);
         } else {
-          callback(null, result);
+          let user = {
+            id: result.insertId,
+            username: input.username,
+            totalscore: 0
+          }
+          callback(null, user);
         }
       })
     }
   }, 
+  
   rooms: {
     get: function(input, callback) {
       db.query(`SELECT * FROM messages where roomId=${input}`, (err, result) => {
