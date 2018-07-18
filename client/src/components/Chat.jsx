@@ -13,8 +13,8 @@ export default class Chat extends Component {
       user: 'bob',
       userId: 1337,
       activeRoom: 'lobby',
+      activeRoomId: 1,
       rooms: ['lobby', 'theOtherRoom'],
-      roomId: 1,
       roomScore: 0,
       messages: [],
       newMessageText: '',
@@ -31,8 +31,12 @@ export default class Chat extends Component {
 
   getMessages = () => {
     axios.get('/messages')
-      .then(res => {
-        const msgs = res.data.reverse();
+      .then(res => { // Checks each message from server against activeRoomId
+        // and filters out the ones that don't match, messages for the active
+        // room are stored in state.messages
+        const msgs = res.data.reverse().filter(msg => {
+          return (msg.roomId === this.state.activeRoomId);
+        });
         this.setState({
           messages: msgs
         });
