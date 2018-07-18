@@ -11,9 +11,16 @@ export default class App extends React.Component{
   constructor(props){
     super(props)
 
-    this.state = {isLogin: false}
+    this.state = {user:undefined}
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
+    this.handleLogOut = this.handleLogOut.bind(this)
+  }
+
+  handleLogOut(){
+    axios.get('/logout').then(()=>{
+      this.setState({user:undefined})
+    })
   }
 
   handleLogin(username,password){
@@ -23,7 +30,7 @@ export default class App extends React.Component{
     axios.post('/login',{username,password})
     .then(res=>{
       let user = (res.data)
-      this.setState({"isLogin":true,user})
+      this.setState({user})
     })
     .catch(err=>alert("Invalid Login"))
   }
@@ -32,7 +39,7 @@ export default class App extends React.Component{
     axios.post('/signup',{username,password})
     .then(res=>{
       let user = (res.data)
-      this.setState({"isLogin":true,user})
+      this.setState({user})
     })
     .catch(err=>alert("Invalid sign up"))
   }
@@ -41,7 +48,6 @@ export default class App extends React.Component{
     axios.get('/auth').then(res=>{
       if(res.data.id){
         this.setState({
-          isLogin : true,
           user : res.data
           })
       }
@@ -55,8 +61,8 @@ export default class App extends React.Component{
   render(){
     return(
       <div>
-        {this.state.isLogin
-        ? <Chat userData={this.state.user}/> 
+        {this.state.user
+        ? <Chat userData={this.state.user} onLogOut={this.handleLogOut}/> 
         : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
       </div>
     )
