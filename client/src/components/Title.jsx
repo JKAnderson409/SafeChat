@@ -1,7 +1,9 @@
 import React from 'react'
+import { Navbar } from 'react-bootstrap';
 
 export default (props) => {
   return (
+    <Navbar>
     <div className="title">
       Welcome to Mordor {props.user}.
       You are in
@@ -12,5 +14,6 @@ export default (props) => {
       </select>
       The room's score is {props.score}.
     </div>
+    </Navbar>
   )
 }

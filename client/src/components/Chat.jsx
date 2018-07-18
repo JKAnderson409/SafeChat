@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Sentiment from 'sentiment';
+import { Table } from 'react-bootstrap';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
@@ -19,7 +20,8 @@ export default class Chat extends Component {
       roomScore: 0,
       messages: [],
       newMessageText: '',
-      messageScore: 0
+      messageScore: 0,
+      mood: '.positive'
     }
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
@@ -30,9 +32,9 @@ export default class Chat extends Component {
     this.getMessages();
   }
 
-  // componentWillUpdate = () => {
-  //   this.getMessages();
-  // }
+  componentWillUpdate = () => {
+    this.getMessages();
+  }
 
   getMessages = () => {
     axios.get('/messages')
@@ -75,21 +77,30 @@ export default class Chat extends Component {
   changeRoom = (event) => {
     this.setState({
       activeRoom: event.target.value
-    },() => console.log('entering ' + this.state.activeRoom));
-    
-  }
+  })}
+
 
   render() {
     return (
-      <div>
+      <div className={this.state.mood}>
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
-        <div className="chat">
-          <ul>
-            {this.state.messages.map((message, index) => 
-              <Message key={index} messageData={message} user={this.state.user}/>
-            )}
-          </ul>
-          <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        <div className="chat" >
+          <Table striped bordered condensed hover>
+            <thead>
+              <tr>
+                <th>
+                  {this.state.activeRoom}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.messages.map((message, index) => 
+                <Message key={index} messageData={message} user={this.state.user}/>
+              )}
+            </tbody>
+          </Table>
+          
         </div>
       </div>
     )
