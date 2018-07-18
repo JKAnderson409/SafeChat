@@ -20,26 +20,32 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 // app.get('/users');
 // app.post('/users');
-function isAuth(req, res, next) {
-  if(req.session.userData){
-    next();
-  } else {
-    res.redirect('/');
-  }
-}
 
-app.get('/auth',isAuth, function(req,res){
+app.get('/rooms', isAuth, controller.rooms.get);
+app.post('/rooms');
+
+app.get('/messages', isAuth, controller.messages.get);
+app.post('/messages', isAuth, controller.messages.post);
+
+
+/*****************************************************************/
+//Authentication Handlers
+
+app.post('/login', controller.users.get)
+app.post('/signup', controller.users.post)
+app.get('/logout', function(req,res){
+  delete req.session.userData
+  res.redirect('/')
+})
+app.get('/auth', isAuth, function(req,res){
   res.send(req.session.userData)
 })
 
-app.get('/rooms', controller.rooms.get);
-app.post('/rooms');
-
-app.get('/messages', controller.messages.get);
-app.post('/messages', controller.messages.post);
-
-app.post('/login',controller.users.get)
-app.post('/signup',controller.users.post)
+function isAuth(req, res, next) {
+  if(req.session.userData) next();
+  else res.redirect('/');
+}
+/*****************************************************************/
 
 app.get('/*',(req,res)=>res.redirect('/'));
 
