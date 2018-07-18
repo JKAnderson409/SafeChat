@@ -18,13 +18,23 @@ module.exports = {
     get: function(req,res,next){
       model.users.get(req.body,(err,result)=>{
         if(err) next(err)
-        else res.send(result)
+        else {
+          let userData = {
+            id : result.id,
+            username : result.username,
+            totalscore: 0
+          }
+          req.session.userData = userData
+          res.send(result)
+        }
       })
     },
     post: function(req,res,next){
       model.users.post(req.body,(err,result)=>{
         if(err) next(err)
-        else res.send(result)
+        else {
+          res.send(result)
+        }
       })
     }
   },
