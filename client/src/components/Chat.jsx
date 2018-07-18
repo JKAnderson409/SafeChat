@@ -24,13 +24,13 @@ export default class Chat extends Component {
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
   }
-  tick() {
-    this.getMessages();
-  }
 
   componentDidMount = () => {
     this.getMessages();
-    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUpdate = () => {
+    this.getMessages();
   }
 
   getMessages = () => {
@@ -44,7 +44,6 @@ export default class Chat extends Component {
         this.setState({
           messages: msgs
         });
-        console.log(this.state.messages);
       })
       .catch(err => {console.error(err)})
   }
@@ -58,9 +57,8 @@ export default class Chat extends Component {
   refreshInput = () => {this.setState({newMessageText: ''});}
 
   postMessage = () => {
-    console.log(this.state.newMessageText);
     axios.post('/messages', {
-      roomId: this.state.roomId,
+      roomId: this.state.activeRoomId,
       userId: this.state.userId,
       text: this.state.newMessageText,
       score: this.state.messageScore
@@ -76,12 +74,8 @@ export default class Chat extends Component {
   changeRoom = (event) => {
     this.setState({
       activeRoom: event.target.value
-    });
-    console.log('leaving ' + this.state.activeRoom);
-  }
-
-  componentWillMount() {
-    clearInterval(this.interval);
+    },() => console.log('entering ' + this.state.activeRoom));
+    
   }
 
   render() {
