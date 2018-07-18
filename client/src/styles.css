@@ -1,41 +1,7 @@
-/* .chat {
-  font-size: x-small;
-  background-color: slategray;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid bisque;
-  box-sizing: border-box;
-  width: 100em;
-  height: 100em;
-  overflow: scroll;
-  position: absolute;
-} 
-
-.message {
-  border: 3px solid whitesmoke;
-  margin: 5px;
-  position: relative;
-  height: 25px;
-  width: 90%;
-  top: 40px;
-  text-align: center;
-  box-sizing: content-box;
+.positive {
+  background-color: dodgerblue;
 }
 
-.new-message {
-  border: 10px solid rgb(59, 59, 59);
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  height: 40px;
-  box-sizing: border-box;
-  position: absolute;
-  top: 0px;
-  right: auto;
+.negative {
+  background-color: firebrick;
 }
-
-.new-message-input {
-  width: 90%;
-  background-color: inherit;
-  color: antiquewhite;
-} */

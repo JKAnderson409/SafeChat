@@ -20,7 +20,8 @@ export default class Chat extends Component {
       roomScore: 0,
       messages: [],
       newMessageText: '',
-      messageScore: 0
+      messageScore: 0,
+      mood: '.positive'
     }
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
@@ -82,24 +83,31 @@ export default class Chat extends Component {
     console.log('leaving ' + this.state.activeRoom);
   }
 
+  setColor = () => {
+  }
+
   componentWillMount() {
     clearInterval(this.interval);
   }
 
   render() {
     return (
-      <div>
+      <div className={this.state.mood}>
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
         <div className="chat" >
           <Table striped bordered condensed hover>
-            <tr><th>
-              {this.state.activeRoom}
-            </th></tr>
+            <thead>
+              <tr>
+                <th>
+                  {this.state.activeRoom}
+                </th>
+              </tr>
+            </thead>
             <tbody>
-                {this.state.messages.map((message, index) => 
-                  <Message key={index} messageData={message} user={this.state.user}/>
-                )}
+              {this.state.messages.map((message, index) => 
+                <Message key={index} messageData={message} user={this.state.user}/>
+              )}
             </tbody>
           </Table>
           
