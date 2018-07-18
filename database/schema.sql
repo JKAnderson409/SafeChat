@@ -23,7 +23,8 @@ CREATE TABLE IF NOT EXISTS messages (
   username varchar(18),
   messageid int not null auto_increment primary key,
   text varchar(255),
-  score int(10)
+  score int(10),
+  roomname varchar(18)
 );
 
   -- foreign key (roomId) references rooms(roomId),

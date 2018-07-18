@@ -38,8 +38,11 @@ export default class Chat extends Component {
     return (this.state !== nextState);
   }
 
-  getMessages = () => {
-    axios.get('/messages')
+  getMessages = (activeRoom=this.state.activeRoom) => {
+    axios.get('/messages', {
+      params: {
+        activeRoom: activeRoom
+      }})
       .then(res => { // Checks each message from server against activeRoomId
         // and filters out the ones that don't match, messages for the active
         // room are stored in state.messages
@@ -75,7 +78,8 @@ export default class Chat extends Component {
       userId: this.props.userData.id,
       username: this.props.userData.username,
       text: this.state.newMessageText,
-      score: this.state.messageScore
+      score: this.state.messageScore,
+      roomname: this.state.activeRoom
     })
       .then(res => {
         this.refreshInput();
@@ -89,6 +93,7 @@ export default class Chat extends Component {
     this.setState({
       activeRoom: event.target.value
     });
+    this.getMessages(event.target.value);
   }
 
   setMood = () => {
@@ -104,6 +109,7 @@ export default class Chat extends Component {
 
 
   render() {
+
     return (
       <div >
         <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
