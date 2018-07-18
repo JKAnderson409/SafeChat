@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Sentiment from 'sentiment';
+import { Table } from 'react-bootstrap';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
@@ -89,13 +90,19 @@ export default class Chat extends Component {
     return (
       <div>
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
-        <div className="chat">
-          <ul>
-            {this.state.messages.map((message, index) => 
-              <Message key={index} messageData={message} user={this.state.user}/>
-            )}
-          </ul>
-          <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        <div className="chat" >
+          <Table striped bordered condensed hover>
+            <tr><th>
+              {this.state.activeRoom}
+            </th></tr>
+            <tbody>
+                {this.state.messages.map((message, index) => 
+                  <Message key={index} messageData={message} user={this.state.user}/>
+                )}
+            </tbody>
+          </Table>
+          
         </div>
       </div>
     )
