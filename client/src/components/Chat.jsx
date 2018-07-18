@@ -13,8 +13,9 @@ export default class Chat extends Component {
       user: 'bob',
       userId: 1337,
       activeRoom: 'lobby',
+      activeRoomId: 1,
       rooms: ['lobby', 'theOtherRoom'],
-      roomId: 1,
+      // roomId: 1,
       roomScore: 0,
       messages: [],
       newMessageText: '',
@@ -24,15 +25,23 @@ export default class Chat extends Component {
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
   }
+  tick() {
+    this.getMessages();
+  }
 
   componentDidMount = () => {
     this.getMessages();
+    this.interval = setInterval(() => this.tick(), 1000);
   }
 
   getMessages = () => {
     axios.get('/messages')
-      .then(res => {
-        const msgs = res.data.reverse();
+      .then(res => { // Checks each message from server against activeRoomId
+        // and filters out the ones that don't match, messages for the active
+        // room are stored in state.messages
+        const msgs = res.data.reverse().filter(msg => {
+          return (msg.roomId === this.state.activeRoomId);
+        });
         this.setState({
           messages: msgs
         });
@@ -52,7 +61,7 @@ export default class Chat extends Component {
   postMessage = () => {
     console.log(this.state.newMessageText);
     axios.post('/messages', {
-      roomId: this.state.roomId,
+      roomId: this.state.activeRoomId,
       userId: this.state.userId,
       text: this.state.newMessageText,
       score: this.state.messageScore
@@ -70,6 +79,10 @@ export default class Chat extends Component {
       activeRoom: event.target.value
     });
     console.log('leaving ' + this.state.activeRoom);
+  }
+
+  componentWillMount() {
+    clearInterval(this.interval);
   }
 
   render() {
