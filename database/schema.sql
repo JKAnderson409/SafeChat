@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS rooms (
 CREATE TABLE IF NOT EXISTS messages (
   roomId int(10) not null,
   userId int(10) not null,
+  username varchar(18),
   messageid int not null auto_increment primary key,
   text varchar(255),
   score int(10)

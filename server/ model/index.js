@@ -17,8 +17,8 @@ module.exports = {
       //    //check if user exists
       //    // if not make new account
       //  }
-      var strQuery = `INSERT INTO messages (roomId, userId, text, score)
-      VALUES (${data.roomId}, ${data.userId}, "${data.text}", ${data.score})`
+      var strQuery = `INSERT INTO messages (roomId, userId, username, text, score)
+      VALUES (${data.roomId}, ${data.userId}, "${data.username}", "${data.text}", ${data.score})`
       db.query(strQuery, (err, result) => {
         if (err) {
           callback(err);
