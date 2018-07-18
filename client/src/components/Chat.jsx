@@ -11,8 +11,6 @@ export default class Chat extends Component {
   constructor(props){
     super(props)
     this.state = {
-      user: 'bob',
-      userId: 1337,
       activeRoom: 'lobby',
       activeRoomId: 1,
       rooms: ['lobby', 'theOtherRoom'],
@@ -23,6 +21,7 @@ export default class Chat extends Component {
       messageScore: 0,
       mood: '.positive'
     }
+    console.log(this.props, 'this is the props');
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
@@ -46,7 +45,7 @@ export default class Chat extends Component {
         });
         this.setState({
           messages: msgs
-        });
+        }, console.log(msgs));
       })
       .catch(err => {console.error(err)})
   }
@@ -62,7 +61,8 @@ export default class Chat extends Component {
   postMessage = () => {
     axios.post('/messages', {
       roomId: this.state.activeRoomId,
-      userId: this.state.userId,
+      userId: this.props.userData.id,
+      username: this.props.userData.username,
       text: this.state.newMessageText,
       score: this.state.messageScore
     })

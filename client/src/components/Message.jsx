@@ -1,9 +1,10 @@
 import React from 'react'
 
 const Message = (props) => {
+  {console.log("Individual message", props)}
   return (
     <tr>
-      <td>{props.user}</td> 
+      <td>{props.messageData.username}</td> 
       <td>{props.messageData.text}</td>
     </tr>
   )
