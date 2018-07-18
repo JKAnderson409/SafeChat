@@ -33,6 +33,12 @@ module.exports = {
       model.users.post(req.body,(err,result)=>{
         if(err) next(err)
         else {
+          let userData = {
+            id : result.id,
+            username : result.username,
+            totalscore: 0
+          }
+          req.session.userData = userData
           res.send(result)
         }
       })
