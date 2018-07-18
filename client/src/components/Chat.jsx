@@ -15,6 +15,7 @@ export default class Chat extends Component {
       activeRoom: 'lobby',
       activeRoomId: 1,
       rooms: ['lobby', 'theOtherRoom'],
+      // roomId: 1,
       roomScore: 0,
       messages: [],
       newMessageText: '',
@@ -60,7 +61,7 @@ export default class Chat extends Component {
   postMessage = () => {
     console.log(this.state.newMessageText);
     axios.post('/messages', {
-      roomId: this.state.roomId,
+      roomId: this.state.activeRoomId,
       userId: this.state.userId,
       text: this.state.newMessageText,
       score: this.state.messageScore
