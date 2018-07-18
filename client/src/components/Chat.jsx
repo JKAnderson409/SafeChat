@@ -77,11 +77,8 @@ export default class Chat extends Component {
   changeRoom = (event) => {
     this.setState({
       activeRoom: event.target.value
+  })}
 
-  setColor = () => {
-  }
-
-  }
 
   render() {
     return (
