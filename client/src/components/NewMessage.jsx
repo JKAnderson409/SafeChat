@@ -8,7 +8,7 @@ export default (props) => {
         <InputGroup.Button>
           <Button onClick={props.postMessage} >Post!</Button>
         </InputGroup.Button>
-        <FormControl onChange={props.handleChange} type='test' value={props.text}/>
+        <FormControl onChange={props.handleChange} type='text' value={props.text}/>
       </InputGroup>
     </FormGroup>
   )

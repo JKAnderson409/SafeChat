@@ -18,7 +18,7 @@ module.exports = {
       //    //check if user exists
       //    // if not make new account
       //  }
-      console.log('this is data', data);
+      // console.log('this is data', data);
       var strQuery = `INSERT INTO messages (roomId, userId, username, text, score, roomname)
       VALUES (${data.roomId}, ${data.userId}, "${data.username}", "${data.text}", ${data.score}, "${data.roomname}")`
       db.query(strQuery, (err, result) => {
@@ -26,8 +26,11 @@ module.exports = {
           console.log(err, 'this is a post request eror');
           callback(err);
         } else {
-          console.log('does this happen?');
-          callback(null, result);
+          var updateQuery = `UPDATE users u SET u.totalscore = u.totalscore + ${data.score} WHERE u.id = ${data.userId}`
+          db.query(updateQuery,(err2,result2)=>{
+            if(err) callback(err)
+            else callback(null, result);
+          })
         }
       });
     }
