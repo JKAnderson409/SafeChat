@@ -8,7 +8,7 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        console.log('THe get request ran');
+        console.log('THe get request ran', result);
         callback(null, result);
       }
     });
