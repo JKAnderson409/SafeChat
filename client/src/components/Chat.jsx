@@ -18,7 +18,7 @@ export default class Chat extends Component {
       roomScore: 0,
       messages: [],
       newMessageText: '',
-      messageScore: 0,
+      messageScore: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
