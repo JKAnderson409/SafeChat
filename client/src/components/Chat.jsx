@@ -25,13 +25,13 @@ export default class Chat extends Component {
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
   }
-  tick() {
-    this.getMessages();
-  }
 
   componentDidMount = () => {
     this.getMessages();
-    this.interval = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUpdate = () => {
+    this.getMessages();
   }
 
   getMessages = () => {
@@ -45,7 +45,6 @@ export default class Chat extends Component {
         this.setState({
           messages: msgs
         });
-        console.log(this.state.messages);
       })
       .catch(err => {console.error(err)})
   }
@@ -59,7 +58,6 @@ export default class Chat extends Component {
   refreshInput = () => {this.setState({newMessageText: ''});}
 
   postMessage = () => {
-    console.log(this.state.newMessageText);
     axios.post('/messages', {
       roomId: this.state.activeRoomId,
       userId: this.state.userId,
@@ -77,12 +75,8 @@ export default class Chat extends Component {
   changeRoom = (event) => {
     this.setState({
       activeRoom: event.target.value
-    });
-    console.log('leaving ' + this.state.activeRoom);
-  }
-
-  componentWillMount() {
-    clearInterval(this.interval);
+    },() => console.log('entering ' + this.state.activeRoom));
+    
   }
 
   render() {
@@ -91,8 +85,8 @@ export default class Chat extends Component {
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
         <div className="chat">
           <ul>
-            {this.state.messages.map((message, index, arr) => 
-              <Message key={index} messageData={message} />
+            {this.state.messages.map((message, index) => 
+              <Message key={index} messageData={message} user={this.state.user}/>
             )}
           </ul>
           <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
