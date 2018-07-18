@@ -85,8 +85,8 @@ export default class Chat extends Component {
         <Title user={this.state.user} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
         <div className="chat">
           <ul>
-            {this.state.messages.map((message, index, arr) => 
-              <Message key={index} messageData={message} />
+            {this.state.messages.map((message, index) => 
+              <Message key={index} messageData={message} user={this.state.user}/>
             )}
           </ul>
           <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
