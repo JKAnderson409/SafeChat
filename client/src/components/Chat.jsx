@@ -18,15 +18,19 @@ export default class Chat extends Component {
       roomScore: 0,
       messages: [],
       newMessageText: '',
-      messageScore: 0
+      messageScore: 0,
     }
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
   }
+  tick() {
+    this.getMessages();
+  }
 
   componentDidMount = () => {
     this.getMessages();
+    this.interval = setInterval(() => this.tick(), 1000);
   }
 
   getMessages = () => {
@@ -70,6 +74,10 @@ export default class Chat extends Component {
       activeRoom: event.target.value
     });
     console.log('leaving ' + this.state.activeRoom);
+  }
+
+  componentWillMount() {
+    clearInterval(this.interval);
   }
 
   render() {
