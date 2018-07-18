@@ -21,5 +21,12 @@ module.exports = {
     post: function(req,res){
       
     }
+  },
+  rooms:{
+    get: function(req,res){
+      model.rooms.get((err,rooms)=>{
+        res.send(rooms)
+      })
+    }
   }
 }

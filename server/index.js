@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.get('/users');
 app.post('/users');
 
-app.get('/rooms');
+app.get('/rooms', controller.rooms.get);
 app.post('/rooms');
 
 app.get('/messages', controller.messages.get);
