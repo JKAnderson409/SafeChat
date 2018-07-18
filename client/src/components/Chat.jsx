@@ -49,9 +49,12 @@ export default class Chat extends Component {
       .then(res => { // Checks each message from server against activeRoomId
         // and filters out the ones that don't match, messages for the active
         // room are stored in state.messages
-        const msgs = res.data.reverse().filter(msg => {
-          return (msg.roomId === this.state.activeRoomId);
-        });
+        var msgs;
+        if(res.data){
+          msgs = res.data.reverse().filter(msg => {
+            return (msg.roomId === this.state.activeRoomId);
+          });
+        }
         this.setState({
           messages: msgs
         }, console.log(msgs));
