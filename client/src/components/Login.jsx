@@ -12,8 +12,6 @@ export default class Login extends React.Component{
     this.state = {};
   }
 
-
-
   handleEmailInput(e){
     this.setState({'email':e.target.value})
   }
@@ -50,7 +48,15 @@ export default class Login extends React.Component{
           </div>
           <Button onClick={()=>{
             this.props.onLogin(this.state.email,this.state.password)
-            }}>Submit</Button> 
+            }}>Login</Button> 
+
+           <Button onClick={()=>{
+            this.props.onSignUp(this.state.email,this.state.password)
+            }}>Sign Up</Button>   
+
+            <Button onClick={()=>{
+            this.props.onLogin("anonymous",this.state.password)
+            }}>Anonymous Login</Button> 
         </form>
       </div>
     )

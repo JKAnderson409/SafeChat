@@ -13,13 +13,26 @@ export default class App extends React.Component{
 
     this.state = {isLogin: false}
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
   }
 
   handleLogin(username,password){
-    //handle Login logic
-    console.log(username,password)
-    this.setState({"isLogin":true})
+    if(username === 'anonymous'){
+      return this.setState({isLogin:true})
+    }
+    axios.post('/login',{username,password})
+    .then(res=>{
+      this.setState({"isLogin":true})
+    })
+    .catch(err=>alert("Invalid Login"))
+  }
 
+  handleSignUp(username,password){
+    axios.post('/signup',{username,password})
+    .then(res=>{
+      this.setState({"isLogin":true})
+    })
+    .catch(err=>alert("Invalid sign up"))
   }
 
   render(){
@@ -27,8 +40,7 @@ export default class App extends React.Component{
       <div>
         {this.state.isLogin
         ? <Chat/> 
-        : <Login onLogin={this.handleLogin}/>} 
-
+        : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
       </div>
     )
   }

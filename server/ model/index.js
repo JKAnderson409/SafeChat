@@ -31,16 +31,21 @@ module.exports = {
   },
   users: {
     get: function(input, callback) {
-      db.query(`SELECT * FROM users WHERE username=${input}`, (err, result) => {
-        if (err) {
-          callback(err);
+      let {username,password} = input;
+      let queryStr = `SELECT * FROM users u WHERE u.username = "${username}" AND u.password = "${password}"`
+      db.query(queryStr,(err, result) => {
+        console.log({result})
+        if (!result.length) {
+          callback("Wrong Login");
         } else {
           callback(null, result);
         }
-      });
+      })
     }, 
     post: function(input, callback) {
-      db.query(`INSERT INTO users (username) VALUES (${input})`, (err, result) => {
+      let params = [input.username,input.password]
+      let queryStr = `INSERT INTO users VALUES (default,?,?,0)`
+      db.query(queryStr, params,(err, result) => {
         if (err) {
           callback(err);
         } else {
