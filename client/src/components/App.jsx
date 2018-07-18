@@ -22,7 +22,8 @@ export default class App extends React.Component{
     }
     axios.post('/login',{username,password})
     .then(res=>{
-      this.setState({"isLogin":true})
+      let user = (res.data)
+      this.setState({"isLogin":true,user})
     })
     .catch(err=>alert("Invalid Login"))
   }
@@ -30,7 +31,8 @@ export default class App extends React.Component{
   handleSignUp(username,password){
     axios.post('/signup',{username,password})
     .then(res=>{
-      this.setState({"isLogin":true})
+      let user = (res.data)
+      this.setState({"isLogin":true,user})
     })
     .catch(err=>alert("Invalid sign up"))
   }
@@ -39,7 +41,7 @@ export default class App extends React.Component{
     return(
       <div>
         {this.state.isLogin
-        ? <Chat/> 
+        ? <Chat userData={this.state.user}/> 
         : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
       </div>
     )
