@@ -4,7 +4,7 @@ const Message = (props) => {
   {console.log(props.messageData, 'This is the messageData')}
   return (
     <div className="message">
-      <p>{props.messageData.userId} > {props.messageData.text}</p>
+      <p>{props.user} > {props.messageData.text}</p>
     </div>
   )
 }
