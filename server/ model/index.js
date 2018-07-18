@@ -13,17 +13,17 @@ module.exports = {
     });
     },
     post: function(data, callback) {
-      //  if (data.user) {
-      //    //check if user exists
-      //    // if not make new account
-      //  }
       var strQuery = `INSERT INTO messages (roomId, userId, username, text, score)
       VALUES (${data.roomId}, ${data.userId}, "${data.username}", "${data.text}", ${data.score})`
       db.query(strQuery, (err, result) => {
         if (err) {
           callback(err);
         } else {
-          callback(null, result);
+          var updateQuery = `UPDATE users u SET u.totalscore = u.totalscore + ${data.score} WHERE u.id = ${data.userId}`
+          db.query(updateQuery,(err2,result2)=>{
+            if(err) callback(err)
+            else callback(null, result);
+          })
         }
       });
     }

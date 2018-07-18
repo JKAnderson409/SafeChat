@@ -78,7 +78,6 @@ export default class Chat extends Component {
       score: this.state.messageScore
     })
       .then(res => {
-        console.log('new message POSTed to /messages');
         this.refreshInput();
         this.getMessages();
         this.setMood();

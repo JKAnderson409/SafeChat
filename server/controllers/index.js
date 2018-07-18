@@ -22,7 +22,7 @@ module.exports = {
           let userData = {
             id : result.id,
             username : result.username,
-            totalscore: 0
+            totalscore: result.totalscore
           }
           req.session.userData = userData
           res.send(result)
@@ -36,7 +36,7 @@ module.exports = {
           let userData = {
             id : result.id,
             username : result.username,
-            totalscore: 0
+            totalscore: result.totalscore
           }
           req.session.userData = userData
           res.send(result)
