@@ -37,6 +37,21 @@ export default class App extends React.Component{
     .catch(err=>alert("Invalid sign up"))
   }
 
+  checkAuth(){
+    axios.get('/auth').then(res=>{
+      if(res.data.id){
+        this.setState({
+          isLogin : true,
+          user : res.data
+          })
+      }
+    })
+  }
+
+  componentWillMount(){
+    this.checkAuth();
+  }
+  
   render(){
     return(
       <div>

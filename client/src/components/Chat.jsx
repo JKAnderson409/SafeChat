@@ -30,9 +30,9 @@ export default class Chat extends Component {
     this.getMessages();
   }
 
-  componentWillUpdate = () => {
-    this.getMessages();
-  }
+  // componentWillUpdate = () => {
+  //   this.getMessages();
+  // }
 
   getMessages = () => {
     axios.get('/messages')
