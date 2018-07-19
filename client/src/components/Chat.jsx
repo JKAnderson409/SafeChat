@@ -125,10 +125,10 @@ export default class Chat extends Component {
 
 
   render() {
-
+  
     return (
       <div >
-        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom}/>
+        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom} logout={this.props.onLogOut}/>
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
         <div className={this.state.mood} >
           <Table bordered condensed>
