@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var parser = require('body-parser');
 var cors = require('cors');
-var session = require('express-session')
+var session = require('express-session');
 
 var controller = require('./controllers');
 
@@ -15,6 +15,7 @@ app.use(parser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
 app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 600000 }}))
+
 
 app.use(express.static(__dirname + '/../client/dist'));
 
@@ -46,6 +47,8 @@ function isAuth(req, res, next) {
   if(req.session.userData) next();
   else res.redirect('/auth');
 }
+
+
 /*****************************************************************/
 
 app.get('/*',(req,res)=>res.redirect('/'));
