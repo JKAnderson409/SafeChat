@@ -23,8 +23,8 @@ export default class Title extends React.Component {
 render() {
 
   return (
-    <Navbar>
-    <div className="title">
+    <Navbar className="title">
+    <div>
       You are logged in as {this.props.user}.
       You are in 
       <select name="room-selector" onChange={this.props.changeRoom}>

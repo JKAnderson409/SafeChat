@@ -28,12 +28,12 @@ const Message = (props) => {
   }
 
   return (
-    <tr>
+    <tr className="message-row">
       <td style={{width: 45}} className="user-icon">
         <img src={getMoodIcon(props.messageData.score)}/>
         {props.messageData.username}
       </td>
-      <td className="chat-text" >{props.messageData.text}</td>
+      <td className="message-text-box">{props.messageData.text}</td>
     </tr>
   )
 }

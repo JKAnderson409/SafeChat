@@ -66,7 +66,7 @@ export default class App extends React.Component{
   
   render(){
     return(
-      <div>
+      <div className="app">
         {this.state.user
         ? <Chat userData={this.state.user} onLogOut={this.handleLogOut}/> 
         : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
