@@ -1,4 +1,6 @@
 let db = require('../../database/database.js');
+let bcrypt = require('bcryptjs');
+let bHash = require('../lib/util.js')
 
 module.exports = {
   messages: {
@@ -39,30 +41,37 @@ module.exports = {
   users: {
     get: function(input, callback) {
       let {username,password} = input;
-      let queryStr = `SELECT * FROM users u WHERE u.username = "${username}" AND u.password = "${password}"`
+      let queryStr = `SELECT * FROM users u WHERE u.username = "${username}"`
       db.query(queryStr,(err, result) => {
         if (!result.length) {
-          callback("Wrong Login");
+          callback("No username found");
         } else {
-          let {id,username,totalscore}= result[0]
-          callback(null, {id,username,totalscore});
+          bcrypt.compare(password,result[0].password,(err, matched)=>{
+            if (!matched) callback("Wrong password")
+            else{
+              let {id,username,totalscore}= result[0]
+              callback(null, {id,username,totalscore});
+            }
+          })
         }
       })
     }, 
     post: function(input, callback) {
-      let params = [input.username,input.password]
-      let queryStr = `INSERT INTO users VALUES (default,?,?,0)`
-      db.query(queryStr, params,(err, result) => {
-        if (err) {
-          callback(err);
-        } else {
-          let user = {
-            id: result.insertId,
-            username: input.username,
-            totalscore: 0
+      bHash(input.password,(err,result)=>{
+        let params = [input.username,result]
+        let queryStr = `INSERT INTO users VALUES (default,?,?,0)`
+        db.query(queryStr, params,(err, result) => {
+          if (err) {
+            callback(err);
+          } else {
+            let user = {
+              id: result.insertId,
+              username: input.username,
+              totalscore: 0
+            }
+            callback(null, user);
           }
-          callback(null, user);
-        }
+        })
       })
     }
   }, 
