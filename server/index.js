@@ -14,7 +14,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
-app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 600000 }}))
 
 app.use(express.static(__dirname + '/../client/dist'));
 
