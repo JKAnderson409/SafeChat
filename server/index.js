@@ -50,6 +50,6 @@ function isAuth(req, res, next) {
 
 app.get('/*',(req,res)=>res.redirect('/'));
 
-app.listen(port,()=> console.log('Listening on :', port));
+app.listen(port,'0.0.0.0',()=> console.log('Listening on :', port));
 
 module.exports.app = app;
