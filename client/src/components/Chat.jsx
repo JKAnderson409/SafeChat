@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Jumbotron } from 'react-bootstrap';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
@@ -21,7 +21,7 @@ export default class Chat extends Component {
       newMessageText: '',
       messageScore: 0,
       mood: 'neutral',
-      moods: ['highly-neg', 'neg', 'slighly-neg', 'nuetral', 'slightly-pos', 'pos', 'highly-pos'],
+      moods: ['highly-neg', 'neg', 'slightly-neg', 'neutral', 'slightly-pos', 'pos', 'highly-pos'],
       sessionDuration: 0
     }
     this.handleChange = this.handleChange.bind(this);
@@ -137,19 +137,20 @@ export default class Chat extends Component {
   setMood = () => {
     let score = this.state.roomScore;
     var newMoodIdx = 3;
-    if (score >= 6) {
+    if (score >= 18) {
       newMoodIdx = 6;
-    } else if (score >= 3) {
+    } else if (score >= 9) {
       newMoodIdx = 5;
-    } else if (score > 0) {
+    } else if (score > 4) {
       newMoodIdx = 4;
-    } else if (score <= -6) {
+    } else if (score <= -18) {
       newMoodIdx = 0;
-    } else if (score <= -3) {
+    } else if (score <= -9) {
       newMoodIdx = 1;
-    } else if (score < 0) {
+    } else if (score < -4) {
       newMoodIdx = 2;
     }
+    console.log('new mood: ' + this.state.moods[newMoodIdx]);
     this.setState({
       mood: this.state.moods[newMoodIdx]
     });
@@ -184,18 +185,21 @@ export default class Chat extends Component {
   
     return (
       <div >
-        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom} logout={this.props.onLogOut}/>
+        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom} logout={this.props.onLogOut} />
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
-        <div className={this.state.mood} >
-          <Table responsive hover >
-            <tbody>
-              {this.state.messages.map((message, index) => 
-                <Message key={message.messageid} messageData={message} user={this.state.user}/>
-              )}
-            </tbody>
-          </Table>
-          
-        </div>
+          <Jumbotron className="chat-container" >
+            <div className={this.state.mood}>
+              <div >
+                <Table responsive hover maxHeight="10px" >
+                  <tbody>
+                    {this.state.messages.map((message, index) => 
+                      <Message key={message.messageid} messageData={message} user={this.state.user}/>
+                    )}
+                  </tbody>
+                </Table>
+              </div>
+            </div>
+          </Jumbotron>
       </div>
     )
   }
