@@ -18,9 +18,6 @@ app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 600000 }}))
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-// app.get('/users');
-// app.post('/users');
-
 app.get('/rooms', isAuth, controller.rooms.get);
 app.post('/rooms', isAuth, controller.rooms.post);
 
