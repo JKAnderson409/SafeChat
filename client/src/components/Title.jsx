@@ -21,6 +21,7 @@ export default class Title extends React.Component {
   }
 
 render() {
+
   return (
     <Navbar>
     <div className="title">
@@ -33,6 +34,7 @@ render() {
       </select>
         <button onClick={() =>this.addnewroom(this.state.term)}>Add Room</button>
         <input value={this.state.term} onChange={this.onChange}></input>
+        <button onClick={this.props.logout}>Log Out</button>
     </div>
     </Navbar>
   )
