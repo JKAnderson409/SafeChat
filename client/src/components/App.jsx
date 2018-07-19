@@ -4,9 +4,6 @@ import Chat from './Chat.jsx';
 import '../styles/css/styles.css';
 
 import Login from './Login.jsx';
-import Login2 from './Login2.jsx';
-import Login3 from './Login3.jsx';
-
 
 export default class App extends React.Component{
   constructor(props){
@@ -72,7 +69,7 @@ export default class App extends React.Component{
       <div>
         {this.state.user
         ? <Chat userData={this.state.user} onLogOut={this.handleLogOut}/> 
-        : <Login3 onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
+        : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
       </div>
     )
   }
