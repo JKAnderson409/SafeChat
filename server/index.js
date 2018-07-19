@@ -38,13 +38,13 @@ app.get('/logout', function(req,res){
   delete req.session.userData
   res.redirect('/')
 })
-app.get('/auth', isAuth, function(req,res){
+app.get('/auth', function(req,res){
   res.send(req.session.userData)
 })
 
 function isAuth(req, res, next) {
   if(req.session.userData) next();
-  else res.redirect('/');
+  else res.redirect('/auth');
 }
 /*****************************************************************/
 
