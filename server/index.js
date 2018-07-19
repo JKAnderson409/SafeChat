@@ -14,7 +14,7 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(morgan('dev'));
-app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 600000 }}))
 
 app.use(express.static(__dirname + '/../client/dist'));
 
@@ -38,13 +38,13 @@ app.get('/logout', function(req,res){
   delete req.session.userData
   res.redirect('/')
 })
-app.get('/auth', isAuth, function(req,res){
+app.get('/auth', function(req,res){
   res.send(req.session.userData)
 })
 
 function isAuth(req, res, next) {
   if(req.session.userData) next();
-  else res.redirect('/');
+  else res.redirect('/auth');
 }
 /*****************************************************************/
 
