@@ -19,9 +19,6 @@ app.use(session({ secret: 'safe-chat-secret', cookie: { maxAge: 600000 }}))
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-// app.get('/users');
-// app.post('/users');
-
 app.get('/rooms', isAuth, controller.rooms.get);
 app.post('/rooms', isAuth, controller.rooms.post);
 
@@ -53,6 +50,6 @@ function isAuth(req, res, next) {
 
 app.get('/*',(req,res)=>res.redirect('/'));
 
-app.listen(port,()=> console.log('Listening on :', port));
+app.listen(port,'0.0.0.0',()=> console.log('Listening on :', port));
 
 module.exports.app = app;

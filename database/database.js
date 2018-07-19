@@ -1,11 +1,12 @@
 var mysql = require('mysql');
-
-var db = mysql.createConnection({
+var dbURL = process.env.CLEARDB_DATABASE_URL || {
   host: 'localhost',
   user: 'root',
   password: 'password',
   database: 'chat'
-});
+}
+
+var db = mysql.createConnection(dbURL);
 
 
 db.connect((err) => {
