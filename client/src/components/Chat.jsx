@@ -15,7 +15,7 @@ export default class Chat extends Component {
       user: 'Hard-Code Bob',
       activeRoom: 'lobby',
       activeRoomId: 1,
-      rooms: ['lobby', 'theOtherRoom'], // Need to have this pull from the database otherwise rooms reset on refresh
+      rooms: ['lobby', 'theOtherRoom'],
       roomScore: 0,
       messages: [],
       newMessageText: '',
@@ -36,7 +36,9 @@ export default class Chat extends Component {
       sessionDuration: prevState.sessionDuration + 1
     }))
     this.getMessages();
-    console.log(this.state.sessionDuration);
+    if (this.state.sessionDuration === 600) {
+      this.props.onLogOut();
+    }
   }
 
   componentDidMount = () => {
@@ -174,7 +176,7 @@ export default class Chat extends Component {
       .catch(function (error) {
         console.log(error);
       });
-    
+
   }
 
 
