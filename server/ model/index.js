@@ -2,8 +2,9 @@ let db = require('../../database/database.js');
 
 module.exports = {
   messages: {
-    get: function(callback) {
-    var strQuery = 'SELECT * FROM messages';
+    get: function(query, callback) {
+      // console.log(query);// `Select * from messages where roomname="${req.query.activeRoom}"`
+    var strQuery = `Select * from messages where roomname="${query}"`; //Select * from messages where roomname="theOtherRoom"; //'SELECT * FROM messages'
     db.query(strQuery, (err, result) => {
       if (err) {
         callback(err);
@@ -13,10 +14,16 @@ module.exports = {
     });
     },
     post: function(data, callback) {
-      var strQuery = `INSERT INTO messages (roomId, userId, username, text, score)
-      VALUES (${data.roomId}, ${data.userId}, "${data.username}", "${data.text}", ${data.score})`
+      //  if (data.user) {
+      //    //check if user exists
+      //    // if not make new account
+      //  }
+      // console.log('this is data', data);
+      var strQuery = `INSERT INTO messages (roomId, userId, username, text, score, roomname)
+      VALUES (${data.roomId}, ${data.userId}, "${data.username}", "${data.text}", ${data.score}, "${data.roomname}")`
       db.query(strQuery, (err, result) => {
         if (err) {
+          console.log(err, 'this is a post request eror');
           callback(err);
         } else {
           var updateQuery = `UPDATE users u SET u.totalscore = u.totalscore + ${data.score} WHERE u.id = ${data.userId}`

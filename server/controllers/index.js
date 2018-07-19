@@ -2,7 +2,9 @@ let model = require("../ model")
 module.exports = {
   messages:{
     get: function(req,res){
-      model.messages.get((err,messages)=>{
+      // console.log(req.query.activeRoom);
+      var query = req.query.activeRoom;
+      model.messages.get(query, (err,messages)=>{
         res.send(messages)
       })
     },
