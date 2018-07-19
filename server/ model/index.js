@@ -77,17 +77,17 @@ module.exports = {
   }, 
   
   rooms: {
-    get: function(input, callback) {
-      db.query(`SELECT * FROM messages where roomId=${input}`, (err, result) => {
+    get: function(callback) {
+      db.query("SELECT roomname FROM rooms", (err, result) => {
         if (err) {
           callback(err);
         } else {
-          callback(result);
+          callback(null, result);
         }
       })
     },
     post: function(input, callback) {
-      db.query(`INSERT INTO rooms (roomname) VALUES (${input})`, (err, result) => {
+      db.query(`INSERT INTO rooms (roomname, users_id, roomscore) VALUES ("${input.roomname}", ${input.users_id}, ${input.roomscore})`, (err, result) => {
         if (err) {
           callback(err);
         } else {
