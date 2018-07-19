@@ -36,7 +36,7 @@ export default class Chat extends Component {
       sessionDuration: prevState.sessionDuration + 1
     }))
     this.getMessages();
-    if (this.state.sessionDuration === 600) {
+    if (this.state.sessionDuration > 590) {
       this.props.onLogOut();
     }
   }
