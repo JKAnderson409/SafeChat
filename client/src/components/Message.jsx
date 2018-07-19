@@ -11,15 +11,15 @@ const Message = (props) => {
 
   const getMoodIcon = (score) => {
     let icon = neutralCommentIcon;
-    if (score >= 6) {
+    if (score >= 8) {
       icon = highlyPosCommentIcon;
-    } else if (score >= 3) {
+    } else if (score >= 4) {
       icon = posCommentIcon;
     } else if (score > 0) {
       icon = slightlyPosCommentIcon;
-    } else if (score <= -6) {
+    } else if (score <= -8) {
       icon = highlyNegCommentIcon;
-    } else if (score <= -3) {
+    } else if (score <= -4) {
       icon = negCommentIcon;
     } else if (score < 0) {
       icon = slightlyNegCommentIcon;
