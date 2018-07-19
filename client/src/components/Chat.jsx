@@ -150,7 +150,6 @@ export default class Chat extends Component {
     } else if (score < -4) {
       newMoodIdx = 2;
     }
-    console.log('new mood: ' + this.state.moods[newMoodIdx]);
     this.setState({
       mood: this.state.moods[newMoodIdx]
     });
@@ -190,7 +189,7 @@ export default class Chat extends Component {
           <Jumbotron className="chat-container" >
             <div className={this.state.mood}>
               <div >
-                <Table responsive hover maxHeight="10px" >
+                <Table responsive hover>
                   <tbody>
                     {this.state.messages.map((message, index) => 
                       <Message key={message.messageid} messageData={message} user={this.state.user}/>
