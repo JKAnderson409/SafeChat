@@ -19,6 +19,7 @@
     "babel-core": "6.24.1",
     "babel-plugin-react": "1.0.0",
     "babel-preset-react": "6.24.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.9.2",
     "bootstrap": "^4.0.0-alpha.2",
     "cors": "^2.8.4",
