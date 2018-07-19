@@ -21,7 +21,8 @@ export default class Chat extends Component {
       newMessageText: '',
       messageScore: 0,
       mood: 'neutral',
-      moods: ['negative', 'neutral', 'positive']
+      moods: ['highly-neg', 'neg', 'slighly-neg', 'nuetral', 'slightly-pos', 'pos', 'highly-pos'],
+      sessionDuration: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.postMessage = this.postMessage.bind(this);
@@ -30,9 +31,24 @@ export default class Chat extends Component {
     this.addRoom = this.addRoom.bind(this);
   }
 
+  tick = () => {
+    this.setState(prevState => ({
+      sessionDuration: prevState.sessionDuration + 1
+    }))
+    this.getMessages();
+    console.log(this.state.sessionDuration);
+  }
+
   componentDidMount = () => {
     this.getMessages();
     this.setMood();
+    this.interval = setInterval(() => {
+      this.tick();
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -54,7 +70,6 @@ export default class Chat extends Component {
             return (msg.roomId === this.state.activeRoomId);
           });
         }
-
         let roomScore = 0;
         messages.forEach((msg)=>roomScore+=msg.score)
         /*******************************************/
@@ -105,10 +120,20 @@ export default class Chat extends Component {
   }
 
   setMood = () => {
-    if (this.state.roomScore >= 0) {
-      var newMoodIdx = 2;
-    } else {
-      var newMoodIdx = 0;
+    let score = this.state.roomScore;
+    var newMoodIdx = 3;
+    if (score >= 6) {
+      newMoodIdx = 6;
+    } else if (score >= 3) {
+      newMoodIdx = 5;
+    } else if (score > 0) {
+      newMoodIdx = 4;
+    } else if (score <= -6) {
+      newMoodIdx = 0;
+    } else if (score <= -3) {
+      newMoodIdx = 1;
+    } else if (score < 0) {
+      newMoodIdx = 2;
     }
     this.setState({
       mood: this.state.moods[newMoodIdx]
@@ -131,10 +156,10 @@ export default class Chat extends Component {
         <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom} logout={this.props.onLogOut}/>
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
         <div className={this.state.mood} >
-          <Table bordered condensed>
+          <Table responsive hover >
             <tbody>
               {this.state.messages.map((message, index) => 
-                <Message key={index} messageData={message} user={this.state.user}/>
+                <Message key={message.messageid} messageData={message} user={this.state.user}/>
               )}
             </tbody>
           </Table>
