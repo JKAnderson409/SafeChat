@@ -27,6 +27,7 @@ export default class Chat extends Component {
     this.postMessage = this.postMessage.bind(this);
     this.refreshInput = this.refreshInput.bind(this);
     this.setMood = this.setMood.bind(this);
+    this.addRoom = this.addRoom.bind(this);
   }
 
   componentDidMount = () => {
@@ -114,12 +115,19 @@ export default class Chat extends Component {
     });
   }
 
+  addRoom = (event) => {
+    var roooms = this.state.rooms.push(event.target.value);
+    this.setState({
+      rooms: roooms
+    })
+  }
+
 
   render() {
 
     return (
       <div >
-        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
+        <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom}/>
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
         <div className={this.state.mood} >
           <Table bordered condensed>

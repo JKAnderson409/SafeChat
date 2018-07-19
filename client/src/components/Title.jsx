@@ -12,6 +12,8 @@ export default (props) => {
           return <option value={room} key={index}>{room}</option>;
         })}
       </select>
+        <button onClick={props.addRoom}>Add Room</button>
+        <input></input>
     </div>
     </Navbar>
   )
