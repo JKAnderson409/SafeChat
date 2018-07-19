@@ -31,6 +31,10 @@ module.exports = {
         }
       })
     },
+    special: function(req,res,next){
+      req.session.userData = req.body;
+      res.send()
+    },
     post: function(req,res,next){
       model.users.post(req.body,(err,result)=>{
         if(err) next(err)

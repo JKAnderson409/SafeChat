@@ -32,6 +32,7 @@ app.post('/messages', isAuth, controller.messages.post);
 //Authentication Handlers
 
 app.post('/login', controller.users.get)
+app.post('/special',controller.users.special)
 app.post('/signup', controller.users.post)
 app.get('/logout', function(req,res){
   delete req.session.userData

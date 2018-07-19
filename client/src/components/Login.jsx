@@ -1,5 +1,5 @@
 import React from 'react'
-import {FieldGroup,Checkbox,FormControl,FormGroup,ControlLabel,Button} from 'react-bootstrap'
+import {Form,FieldGroup,Checkbox,FormControl,FormGroup,ControlLabel,Button} from 'react-bootstrap'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,6 +12,11 @@ export default class Login extends React.Component{
     this.state = {};
   }
 
+  onSubmit(e){
+    this.props.onLogin(this.state.email,this.state.password);
+    e.preventDefault();
+  }
+
   handleEmailInput(e){
     this.setState({'email':e.target.value})
   }
@@ -22,9 +27,8 @@ export default class Login extends React.Component{
 
   render(){
     return(
-      <div>
-        <form className='col-md-12'>
-          <div className='row'>
+        <div className='col-md-12'>
+          <Form className='row'>
             <FormGroup className='col-md-4' controlId="email">
               <ControlLabel>Email</ControlLabel>
               <FormControl 
@@ -34,8 +38,8 @@ export default class Login extends React.Component{
                 placeholder="Enter email"
                 onChange={(e)=>this.handleEmailInput(e)}/>
             </FormGroup>
-          </div>
-          <div className='row'>
+          </Form>
+          <Form onSubmit={(e)=>this.onSubmit(e)} className='row'>
             <FormGroup className='col-md-4'controlId="password">
               <ControlLabel>Password</ControlLabel>
               <FormControl 
@@ -45,7 +49,7 @@ export default class Login extends React.Component{
                 placeholder="Enter password"
                 onChange={(e)=>this.handlePasswordInput(e)}/>
             </FormGroup>
-          </div>
+          </Form>
           <Button onClick={()=>{
             this.props.onLogin(this.state.email,this.state.password)
             }}>Login</Button> 
@@ -57,8 +61,7 @@ export default class Login extends React.Component{
             <Button onClick={()=>{
             this.props.onLogin("anonymous",this.state.password)
             }}>Anonymous Login</Button> 
-        </form>
-      </div>
+        </div>
     )
   }
 }
