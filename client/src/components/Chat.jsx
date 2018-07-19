@@ -115,10 +115,11 @@ export default class Chat extends Component {
     });
   }
 
-  addRoom = (event) => {
-    var roooms = this.state.rooms.push(event.target.value);
+  addRoom = (roomname) => {
+    var temp = [...this.state.rooms];
+    temp.push(roomname);
     this.setState({
-      rooms: roooms
+      rooms: temp
     })
   }
 

@@ -1,20 +1,40 @@
 import React from 'react'
 import { Navbar } from 'react-bootstrap';
 
-export default (props) => {
+export default class Title extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      term : ''
+    }
+    this.onChange = this.onChange.bind(this);
+    this.addnewroom = this.addnewroom.bind(this);
+  }
+  addnewroom(roomname) {
+    this.props.addRoom(roomname);
+  }
+
+  onChange (e) {
+    this.setState({
+      term: e.target.value
+    });
+  }
+
+render() {
   return (
     <Navbar>
     <div className="title">
-      You are logged in as {props.user}.
+      You are logged in as {this.props.user}.
       You are in 
-      <select name="room-selector" onChange={props.changeRoom}>
-        {props.rooms.map((room, index) => {
+      <select name="room-selector" onChange={this.props.changeRoom}>
+        {this.props.rooms.map((room, index) => {
           return <option value={room} key={index}>{room}</option>;
         })}
       </select>
-        <button onClick={props.addRoom}>Add Room</button>
-        <input></input>
+        <button onClick={() =>this.addnewroom(this.state.term)}>Add Room</button>
+        <input value={this.state.term} onChange={this.onChange}></input>
     </div>
     </Navbar>
   )
+}
 }
