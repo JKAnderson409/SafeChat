@@ -58,6 +58,7 @@ export default class Chat extends Component {
         messages.forEach((msg)=>roomScore+=msg.score)
         /*******************************************/
         this.setState({messages,roomScore});
+        this.setMood();
       })
       .catch(err => {console.error(err)})
   }
@@ -68,6 +69,12 @@ export default class Chat extends Component {
         newMessageText: input,
         messageScore: textToScore(input)
     });
+  }
+
+  keyHandler = (event) => {
+    if (event.key === 'Enter') {
+      this.postMessage();
+    }
   }
 
   refreshInput = () => {this.setState({newMessageText: '',messageScore:0});}
@@ -113,7 +120,7 @@ export default class Chat extends Component {
     return (
       <div >
         <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom}/>
-        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh}/>
+        <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
         <div className={this.state.mood} >
           <Table bordered condensed>
             <tbody>
