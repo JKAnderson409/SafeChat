@@ -53,7 +53,20 @@ module.exports = {
   rooms:{
     get: function(req,res){
       model.rooms.get((err,rooms)=>{
-        res.send(rooms)
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(rooms)
+        }
+      })
+    },
+    post: function(req,res){
+      model.rooms.post(req.body, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
       })
     }
   }

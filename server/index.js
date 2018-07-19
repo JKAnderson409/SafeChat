@@ -22,7 +22,7 @@ app.use(express.static(__dirname + '/../client/dist'));
 // app.post('/users');
 
 app.get('/rooms', isAuth, controller.rooms.get);
-app.post('/rooms');
+app.post('/rooms', isAuth, controller.rooms.post);
 
 app.get('/messages', isAuth, controller.messages.get);
 app.post('/messages', isAuth, controller.messages.post);

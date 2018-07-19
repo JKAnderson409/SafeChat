@@ -15,7 +15,7 @@ export default class Chat extends Component {
       user: 'Hard-Code Bob',
       activeRoom: 'lobby',
       activeRoomId: 1,
-      rooms: ['lobby', 'theOtherRoom'],
+      rooms: ['lobby', 'theOtherRoom'], // Need to have this pull from the database otherwise rooms reset on refresh
       roomScore: 0,
       messages: [],
       newMessageText: '',
@@ -77,6 +77,19 @@ export default class Chat extends Component {
         this.setMood();
       })
       .catch(err => {console.error(err)})
+
+
+      axios.get('/rooms')
+      .then(data => {
+        var newRooms = [];
+        for (var i = 0; i < data.data.length; i++) {
+          newRooms.push(data.data[i].roomname);
+        }
+        this.setState({rooms: newRooms});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   handleChange = (event) => {
@@ -141,11 +154,27 @@ export default class Chat extends Component {
   }
 
   addRoom = (roomname) => {
-    var temp = [...this.state.rooms];
-    temp.push(roomname);
-    this.setState({
-      rooms: temp
+    axios.post('/rooms', {
+      roomname: roomname,
+      users_id: 66,
+      roomscore: 0
     })
+    .then((res) => {
+    })
+    .catch(err => {console.log(err)});
+
+    axios.get('/rooms')
+      .then(data => {
+        var newRooms = [];
+        for (var i = 0; i < data.data.length; i++) {
+          newRooms.push(data.data[i].roomname);
+        }
+        this.setState({rooms: newRooms});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    
   }
 
 
