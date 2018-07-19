@@ -10,10 +10,10 @@
 
 .new-message {
   background-color: palegoldenrod;
+  border-bottom: 50px;
   width: 50%;
   margin: auto;
   left: 15rem;
-  position: absolute;
 }
 
 .chat-container {
