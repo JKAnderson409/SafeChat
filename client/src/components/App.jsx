@@ -25,15 +25,23 @@ export default class App extends React.Component{
 
   handleLogin(username,password){
     if(username === 'anonymous'){
-      return this.setState({isLogin:true})
+      axios.post('/special',{})
+        .then(res=>{
+          this.setState({user:{
+            id:0,
+            username:"anonymous",
+            totalscore: 0
+          }})
+        })
+    } else{
+        axios.post('/login',{username,password})
+        .then(res=>{
+          let user = (res.data)
+          this.setState({user})
+        })
+        .catch(err=>alert("Invalid Login"))
+      }
     }
-    axios.post('/login',{username,password})
-    .then(res=>{
-      let user = (res.data)
-      this.setState({user})
-    })
-    .catch(err=>alert("Invalid Login"))
-  }
 
   handleSignUp(username,password){
     axios.post('/signup',{username,password})
