@@ -1,38 +1,70 @@
+.app {
+  background-color: palegoldenrod;
+}
+
+.title {
+  background-color: palegoldenrod;
+  margin: 0px;
+  border: 20px solid palegoldenrod;
+}
+
+.new-message {
+  background-color: palegoldenrod;
+  width: 50%;
+  margin: auto;
+  left: 15rem;
+  position: absolute;
+}
+
+.chat-container {
+  box-sizing: border-box;
+  border: 10rem solid palegoldenrod;
+  border-top: 1rem;
+  margin: 30px;
+  padding: 0px;
+  overflow: scroll;
+  width: 90%;
+  max-height: 800px;
+}
+
 .user-icon {
-  background-color: goldenrod;
-  border: 6px solid white;
-  border-right: 2px solid white;
+  color: lightslategray;
+  background-color: palegoldenrod;
+  border: 15px solid palegoldenrod;
  }
 
-.chat-text {
-  border: 6px solid white;
-  border-left: 12px solid white;
+.message-row {
+  border: 10px solid palegoldenrod;
+  max-height: 10px;
 }
 
 .highly-pos {
-  background-color: dodgerblue;
+  background-color: forestgreen;
+  color: floralwhite;
 }
 
 .pos {
-  background-color: turquoise;
+  background-color: lightgreen;
 }
 
 .slightly-pos {
-  background-color: paleturquoise
+  background-color: palegreen;
 }
 
 .neutral {
-  background-color: wheat;
+  background-color: palegoldenrod;
 }
 
 .slightly-neg {
-  background-color: palevioletred;
+  background-color: darkorange;
 }
 
 .neg {
+  color: antiquewhite;
   background-color: orangered;
 }
 
 .highly-neg {
+  color: antiquewhite;
   background-color: darkred;
 }
