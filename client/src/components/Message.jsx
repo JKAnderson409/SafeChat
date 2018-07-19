@@ -1,22 +1,39 @@
 import React from 'react';
-import posLogo from '../lib/icons/pos_score_comment.png';
-import negLogo from '../lib/icons/neg_score_comment.png';
+import neutralCommentIcon from '../lib/icons/com-nuetral.png';
+import highlyPosCommentIcon from '../lib/icons/com-highly-pos.png'
+import posCommentIcon from '../lib/icons/com-pos.png'
+import slightlyPosCommentIcon from '../lib/icons/com-slightly-pos.png'
+import highlyNegCommentIcon from '../lib/icons/com-highly-neg.png'
+import negCommentIcon from '../lib/icons/com-neg.png'
+import slightlyNegCommentIcon from '../lib/icons/com-slightly-neg.png'
 
 const Message = (props) => {
 
   const getMoodIcon = (score) => {
-    if (score > 0) {
-      return posLogo;
-    } else {
-      return negLogo;
+    let icon = neutralCommentIcon;
+    if (score >= 6) {
+      icon = highlyPosCommentIcon;
+    } else if (score >= 3) {
+      icon = posCommentIcon;
+    } else if (score > 0) {
+      icon = slightlyPosCommentIcon;
+    } else if (score <= -6) {
+      icon = highlyNegCommentIcon;
+    } else if (score <= -3) {
+      icon = negCommentIcon;
+    } else if (score < 0) {
+      icon = slightlyNegCommentIcon;
     }
+    return icon;
   }
 
   return (
     <tr>
-      <td style={{width: 10}}>{props.messageData.username}</td> 
-      <td>{props.messageData.text}</td>
-      <td style={{width: 45}}> <img src={getMoodIcon(props.messageData.score)}/> </td>
+      <td style={{width: 45}} className="user-icon">
+        <img src={getMoodIcon(props.messageData.score)}/>
+        {props.messageData.username}
+      </td>
+      <td className="chat-text" >{props.messageData.text}</td>
     </tr>
   )
 }

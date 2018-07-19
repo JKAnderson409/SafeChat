@@ -1,0 +1,38 @@
+.user-icon {
+  background-color: goldenrod;
+  border: 6px solid white;
+  border-right: 2px solid white;
+ }
+
+.chat-text {
+  border: 6px solid white;
+  border-left: 12px solid white;
+}
+
+.highly-pos {
+  background-color: dodgerblue;
+}
+
+.pos {
+  background-color: turquoise;
+}
+
+.slightly-pos {
+  background-color: paleturquoise
+}
+
+.neutral {
+  background-color: wheat;
+}
+
+.slightly-neg {
+  background-color: palevioletred;
+}
+
+.neg {
+  background-color: orangered;
+}
+
+.highly-neg {
+  background-color: darkred;
+}
