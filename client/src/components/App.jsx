@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-
 import Chat from './Chat.jsx';
-import styles from '../styles.css';
+import '../styles/css/styles.css';
 
 import Login from './Login.jsx';
+import Login2 from './Login2.jsx';
+import Login3 from './Login3.jsx';
 
 
 export default class App extends React.Component{
@@ -71,7 +72,7 @@ export default class App extends React.Component{
       <div>
         {this.state.user
         ? <Chat userData={this.state.user} onLogOut={this.handleLogOut}/> 
-        : <Login onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
+        : <Login3 onLogin={this.handleLogin} onSignUp={this.handleSignUp}/>} 
       </div>
     )
   }
