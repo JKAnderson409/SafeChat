@@ -1,30 +1,36 @@
 .app {
-  background-color: palegoldenrod;
+
 }
 
 .title {
-  background-color: palegoldenrod;
-  margin: 0px;
-  border: 20px solid palegoldenrod;
-}
-
-.new-message {
-  background-color: palegoldenrod;
-  border-bottom: 50px;
-  width: 50%;
-  margin: auto;
-  left: 15rem;
-}
-
-.chat-container {
-  box-sizing: border-box;
-  border: 10rem solid palegoldenrod;
-  border-top: 1rem;
+  grid-area: header;
+  background-color: darkslategray;
+  color: antiquewhite;
   margin: 30px;
-  padding: 0px;
-  overflow: scroll;
-  width: 90%;
-  max-height: 800px;
+}
+
+.container {
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: 300px auto auto;
+  grid-template-areas: 
+    "leftbar header rightbar"
+    "leftbar main rightbar"
+    "leftbar footer rightbar";
+}
+
+.chat {
+  grid-area: main;
+  margin-top: 30px;
+}
+
+.rightbar {
+  grid-area: rightbar;
+  background-color: steelblue;
+}
+
+.leftbar {
+  grid-area: leftbar;
+  background-color: steelblue;
 }
 
 .user-icon {
@@ -33,38 +39,41 @@
   border: 15px solid palegoldenrod;
  }
 
-.message-row {
-  border: 10px solid palegoldenrod;
-  max-height: 10px;
+.message {
+  margin: 15px;
 }
 
-.highly-pos {
+.message-text {
+  text-align: center;
+}
+
+#highly-pos {
   background-color: forestgreen;
   color: floralwhite;
 }
 
-.pos {
+#pos {
   background-color: lightgreen;
 }
 
-.slightly-pos {
+#slightly-pos {
   background-color: palegreen;
 }
 
-.neutral {
-  background-color: palegoldenrod;
+#neutral {
+  background-color:darkslategray;
 }
 
-.slightly-neg {
+#slightly-neg {
   background-color: darkorange;
 }
 
-.neg {
+#neg {
   color: antiquewhite;
   background-color: orangered;
 }
 
-.highly-neg {
+#highly-neg {
   color: antiquewhite;
   background-color: darkred;
 }

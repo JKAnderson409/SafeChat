@@ -1,4 +1,5 @@
 import React from 'react';
+import { p, ListGroupItem, Label } from 'react-bootstrap';
 import neutralCommentIcon from '../lib/icons/com-nuetral.png';
 import highlyPosCommentIcon from '../lib/icons/com-highly-pos.png'
 import posCommentIcon from '../lib/icons/com-pos.png'
@@ -27,15 +28,25 @@ const Message = (props) => {
     return icon;
   }
 
+  const getMoodColor = (score) => {
+    if (score >= 4) {
+      return "success";
+    } else if (score <= -4) {
+      return "danger";
+    } else {
+      return "info";
+    }
+  }
+
   return (
-    <tr className="message-row">
-      <td style={{width: 45}} className="user-icon">
+    <div className="message">
+      <ListGroupItem bsStyle={getMoodColor(props.messageData.score)}>
         <img src={getMoodIcon(props.messageData.score)}/>
-        {props.messageData.username}
-      </td>
-      <td className="message-text-box">{props.messageData.text}</td>
-    </tr>
-  )
+        <Label>{props.user}</Label>
+        <p className="message-text">{props.messageData.text}</p>
+      </ListGroupItem>
+    </div>
+  );
 }
 // Need to add more information into messages array so that user name can be displayed here
 export default Message; 

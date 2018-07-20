@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Jumbotron, Well, ListGroup, ListGroupItem } from 'react-bootstrap'
 import axios from 'axios';
-import { Table, Jumbotron } from 'react-bootstrap';
 
 import NewMessage from './NewMessage.jsx';
 import Message from './Message.jsx';
@@ -183,22 +183,18 @@ export default class Chat extends Component {
   render() {
   
     return (
-      <div >
+      <div className="container" id={this.state.mood}>
+      <div className="header">
         <Title user={this.props.userData.username} room={this.state.activeRoom} score={this.state.roomScore} rooms={this.state.rooms} changeRoom={this.changeRoom} addRoom={this.addRoom} logout={this.props.onLogOut} />
         <NewMessage text={this.state.newMessageText} handleChange={this.handleChange} postMessage={this.postMessage} refresh={this.refresh} keyHandler={this.keyHandler}/>
-          <Jumbotron className="chat-container" >
-            <div className={this.state.mood}>
-              <div >
-                <Table responsive hover>
-                  <tbody>
-                    {this.state.messages.map((message, index) => 
-                      <Message key={message.messageid} messageData={message} user={this.state.user}/>
-                    )}
-                  </tbody>
-                </Table>
-              </div>
-            </div>
-          </Jumbotron>
+      </div>
+        <div className="chat">
+          <ListGroup >
+            {this.state.messages.map((message) => 
+              <Message key={message.messageid} messageData={message} user={this.state.user}/>
+            )}
+          </ListGroup>;
+        </div>
       </div>
     )
   }
