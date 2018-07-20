@@ -1,12 +1,12 @@
-# Project Name
+# Chat Reactor
 
-> Pithy project description
+> Reactive chat environments
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Jeff
+  - __Scrum Master__: Jack
+  - __Developer__: Joe
 
 ## Table of Contents
 
@@ -20,17 +20,12 @@
 
 ## Usage
 
-> Some usage instructions
+> Visit heroku deployment to preview the work-in-progress.
 
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
 - Postgresql 9.1.x
-- etc
-- etc
-
-## Development
 
 ### Installing Dependencies
 
