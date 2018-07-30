@@ -9,7 +9,7 @@ export default class App extends React.Component{
   constructor(props){
     super(props)
 
-    this.state = {user:undefined}
+    this.state = {user: undefined}
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSignUp = this.handleSignUp.bind(this)
     this.handleLogOut = this.handleLogOut.bind(this)
@@ -17,29 +17,18 @@ export default class App extends React.Component{
 
   handleLogOut(){
     axios.get('/logout').then(()=>{
-      this.setState({user:undefined})
+      this.setState({user: undefined})
     })
   }
 
   handleLogin(username,password){
-    if(username === 'anonymous'){
-      axios.post('/special',{})
-        .then(res=>{
-          this.setState({user:{
-            id:0,
-            username:"anonymous",
-            totalscore: 0
-          }})
-        })
-    } else{
-        axios.post('/login',{username,password})
-        .then(res=>{
-          let user = (res.data)
-          this.setState({user})
-        })
-        .catch(err=>alert("Invalid Login"))
-      }
-    }
+    axios.post('/login',{username,password})
+    .then(res=>{
+      let user = (res.data)
+      this.setState({user})
+    })
+    .catch(err=>alert("Invalid Login"))
+  }
 
   handleSignUp(username,password){
     axios.post('/signup',{username,password})
@@ -61,7 +50,7 @@ export default class App extends React.Component{
   }
 
   componentWillMount(){
-    this.checkAuth();
+    this.checkAuth(); //check if user is logged in before screen loads
   }
   
   render(){

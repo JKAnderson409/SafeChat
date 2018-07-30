@@ -30,18 +30,17 @@ app.post('/messages', isAuth, controller.messages.post);
 //Authentication Handlers
 
 app.post('/login', controller.users.get)
-app.post('/special',controller.users.special)
 app.post('/signup', controller.users.post)
 app.get('/logout', function(req,res){
   delete req.session.userData
   res.redirect('/')
 })
 app.get('/auth', function(req,res){
-  res.send(req.session.userData)
+  res.send(req.session.userData) //store user data into session cookies and send to client
 })
 
 function isAuth(req, res, next) {
-  if(req.session.userData) next();
+  if(req.session.userData) next(); // if user is authorized skip
   else res.redirect('/auth');
 }
 

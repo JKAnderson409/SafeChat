@@ -2,7 +2,6 @@ let model = require("../ model")
 module.exports = {
   messages:{
     get: function(req,res){
-      // console.log(req.query.activeRoom);
       var query = req.query.activeRoom;
       model.messages.get(query, (err,messages)=>{
         res.send(messages)
@@ -30,10 +29,6 @@ module.exports = {
           res.send(result)
         }
       })
-    },
-    special: function(req,res,next){
-      req.session.userData = req.body;
-      res.send()
     },
     post: function(req,res,next){
       model.users.post(req.body,(err,result)=>{

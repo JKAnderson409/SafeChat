@@ -62,7 +62,7 @@ module.exports = {
       })
     }, 
     post: function(input, callback) {
-      bHash(input.password,(err,result)=>{
+      bHash(input.password,(err,result)=>{ // hash password before storing
         if(err) return console.log(err)
         let params = [input.username,result]
         let queryStr = `INSERT INTO users VALUES (default,?,?,0)`
